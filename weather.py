@@ -33,8 +33,8 @@ def processRequest(req):
     name = str(parameters.get("given-name"))
     status = str(parameters.get("Status"))
     home = str(parameters.get("Home"))
-    meta = result.get("metadata")
-    intent = meta.get("intentName")
+    meta = result.get("intent")
+    intent = meta.get("displayName")
     if intent == "weather":
         observation = owm.weather_at_place(city)
         w = observation.get_weather()
