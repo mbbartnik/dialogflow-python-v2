@@ -32,6 +32,7 @@ def processRequest(req):
     city = parameters.get("geo-city")
     name = str(parameters.get("given-name"))
     status = str(parameters.get("Status"))
+    home = str(parameters.get("Home"))
     meta = result.get("metadata")
     intent = meta.get("intentName")
     if intent == "weather":
