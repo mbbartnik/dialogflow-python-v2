@@ -76,9 +76,8 @@ def processRequest(req):
             speech = "Nice to meet you "+namedropping
 
     return {
-        "speech": speech,
-        "displayText": speech,
-        "source": "dialogflow-weather"
+        "fulfillmentText": speech,
+        "source": "webhook-micba"
         }
     
 if __name__ == '__main__':
