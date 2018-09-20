@@ -30,8 +30,8 @@ def processRequest(req):
 
     # taking parameters data
     city = parameters.get("geo-city")
-    date = str(parameters.get("date"))
-    time = str(parameters.get("time"))
+    date = parameters.get("date")
+    time = parameters.get("time")
     name = str(parameters.get("given-name"))
     status = str(parameters.get("Status"))
     home = str(parameters.get("Home"))
@@ -84,7 +84,7 @@ def processRequest(req):
             temp_min=str(celsius_result.get('temp_min'))
             temp_max=str(celsius_result.get('temp_max'))
 
-            speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+"    TEST:"
+            speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+"    TEST:"+data
 
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
@@ -104,18 +104,18 @@ def processRequest(req):
             speech = "Nice to meet you "+namedropping
 
     # case for intent "LightHome"
-    if intent == "LightsHome":
-        # if name == "Michael":
-        #     speech = "Hello Michael, today we will talk about sience!"
-        #
-        # elif name in ("Filip", "Philip"):
-        #     speech = "Hello " + name +", did you miss me??"
-        #
-        # elif name in ("Markus","Marcus"):
-        #     speech = "Hello my owner! Yes these is me, your robot Pepper!"
-        # else :
-        #     namedropping = name
-        #     speech = "Nice to meet you "+namedropping
+    #if intent == "LightsHome":
+             #if name == "Michael":
+            #     speech = "Hello Michael, today we will talk about sience!"
+            #
+            # elif name in ("Filip", "Philip"):
+            #     speech = "Hello " + name +", did you miss me??"
+            #
+            # elif name in ("Markus","Marcus"):
+            #     speech = "Hello my owner! Yes these is me, your robot Pepper!"
+            # else :
+            #     namedropping = name
+            #     speech = "Nice to meet you "+namedropping
 
     return {
         "fulfillmentText": speech,
