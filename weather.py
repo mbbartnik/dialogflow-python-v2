@@ -42,40 +42,42 @@ def processRequest(req):
 
     # case for intent "weather"
     if intent == "weather":
-        observation = owm.weather_at_place(city)
-        w = observation.get_weather()
-
-        # cordinate of location
-        latlon_res = observation.get_location()
-        lat = str(latlon_res.get_lat())
-        lon = str(latlon_res.get_lon())
-
-        sun = w.get_sunset_time('iso')
-
-        # wind data
-        wind_res = w.get_wind()
-        wind_speed = str(wind_res.get('speed'))
-
-        # cloud data
-        cloud_result = str(w.get_clouds())
-
-        # weather short status
-        info_short = str(w.get_status())
-
-        # weather detailed status
-        info_detail = str(w.get_detailed_status())
-
-        # humidity percentage
-        humidity = str(w.get_humidity())
-
-        # temperature in Celsius
-        celsius_result = w.get_temperature('celsius')
-        temp_celsius = str(celsius_result)
-        temp_min=str(celsius_result.get('temp_min'))
-        temp_max=str(celsius_result.get('temp_max'))
 
         if city != "":
+            observation = owm.weather_at_place(city)
+            w = observation.get_weather()
+
+            # cordinate of location
+            latlon_res = observation.get_location()
+            lat = str(latlon_res.get_lat())
+            lon = str(latlon_res.get_lon())
+
+            sun = w.get_sunset_time('iso')
+
+            # wind data
+            wind_res = w.get_wind()
+            wind_speed = str(wind_res.get('speed'))
+
+            # cloud data
+            cloud_result = str(w.get_clouds())
+
+            # weather short status
+            info_short = str(w.get_status())
+
+            # weather detailed status
+            info_detail = str(w.get_detailed_status())
+
+            # humidity percentage
+            humidity = str(w.get_humidity())
+
+            # temperature in Celsius
+            celsius_result = w.get_temperature('celsius')
+            temp_celsius = str(celsius_result)
+            temp_min=str(celsius_result.get('temp_min'))
+            temp_max=str(celsius_result.get('temp_max'))
+
             speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short
+
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work"
 
