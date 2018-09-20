@@ -30,6 +30,7 @@ def processRequest(req):
     result = req.get("queryResult")
     parameters = result.get("parameters")
     city = parameters.get("geo-city")
+    date = parameters.get("date")
     name = str(parameters.get("given-name"))
     status = str(parameters.get("Status"))
     home = str(parameters.get("Home"))
@@ -60,9 +61,25 @@ def processRequest(req):
         temp_min_fahrenheit=str(fahrenheit_result.get('temp_min'))
         temp_max_fahrenheit=str(fahrenheit_result.get('temp_max'))
 
-        speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + inf_info
+        if city != "":
+            speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + inf_info
+        else:
+            speech = "The weather for "+date+"is"
 
     if intent == "name":
+        if name == "Michael":
+            speech = "Hello Michael, today we will talk about sience!"
+
+        elif name in ("Filip", "Philip"):
+            speech = "Hello " + name +", did you miss me??"
+
+        elif name in ("Markus","Marcus"):
+            speech = "Hello my owner! Yes these is me, your robot Pepper!"
+        else :
+            namedropping = name
+            speech = "Nice to meet you "+namedropping
+
+    if intent == "LightsHome":
         if name == "Michael":
             speech = "Hello Michael, today we will talk about sience!"
 
