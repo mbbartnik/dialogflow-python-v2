@@ -46,11 +46,11 @@ def processRequest(req):
 
         if city != "":
 
-            fc = owm.daily_forecast(city)
+            fc = owm.three_hours_forecast(city)
 
-            #observation = owm.weather_at_place(city)
+            observation = owm.weather_at_place(city)
 
-            #w = observation.get_weather()
+            w = observation.get_weather()
             f = fc.get_weather_at(date_weather)
 
             # cordinate of location
@@ -69,7 +69,7 @@ def processRequest(req):
 
             # weather short status
             info_short = str(w.get_status())
-            #info_short2 = str(f.get_status())
+            info_short2 = str(f.get_status())
 
             # weather detailed status
             info_detail = str(w.get_detailed_status())
@@ -85,8 +85,8 @@ def processRequest(req):
             # temperature in Celsius
             celsius_result = w.get_temperature('celsius')
             temp_celsius = str(celsius_result.get('temp'))
-            #celsius_result2 = f.get_temperature('celsius')
-            #temp_celsius2 = str(celsius_result2.get('temp'))
+            celsius_result2 = f.get_temperature('celsius')
+            temp_celsius2 = str(celsius_result2.get('temp'))
 
             temp_min=str(celsius_result.get('temp_min'))
             temp_max=str(celsius_result.get('temp_max'))
