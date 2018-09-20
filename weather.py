@@ -37,7 +37,10 @@ def processRequest(req):
     meta = result.get("intent")
     intent = meta.get("displayName")
     if intent == "weather":
-        observation = owm.weather_at_place(city)
+        if city != "":
+            observation = owm.weather_at_place(city)
+        else:
+            observation = owm.weather_at_station
         w = observation.get_weather()
         latlon_res = observation.get_location()
         lat=str(latlon_res.get_lat())
