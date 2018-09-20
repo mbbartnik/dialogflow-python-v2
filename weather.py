@@ -70,13 +70,21 @@ def processRequest(req):
             # humidity percentage
             humidity = str(w.get_humidity())
 
+            # Get atmospheric pressure
+            pressure = int(w.get_pressure())
+
+            fc = owm.daily_forecast(city)
+            f = fc.get_forecast()
+
+
+
             # temperature in Celsius
             celsius_result = w.get_temperature('celsius')
             temp_celsius = str(celsius_result.get('temp'))
             temp_min=str(celsius_result.get('temp_min'))
             temp_max=str(celsius_result.get('temp_max'))
 
-            speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short
+            speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+"    TEST:"+date
 
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
@@ -97,17 +105,17 @@ def processRequest(req):
 
     # case for intent "LightHome"
     if intent == "LightsHome":
-        if name == "Michael":
-            speech = "Hello Michael, today we will talk about sience!"
-
-        elif name in ("Filip", "Philip"):
-            speech = "Hello " + name +", did you miss me??"
-
-        elif name in ("Markus","Marcus"):
-            speech = "Hello my owner! Yes these is me, your robot Pepper!"
-        else :
-            namedropping = name
-            speech = "Nice to meet you "+namedropping
+        # if name == "Michael":
+        #     speech = "Hello Michael, today we will talk about sience!"
+        #
+        # elif name in ("Filip", "Philip"):
+        #     speech = "Hello " + name +", did you miss me??"
+        #
+        # elif name in ("Markus","Marcus"):
+        #     speech = "Hello my owner! Yes these is me, your robot Pepper!"
+        # else :
+        #     namedropping = name
+        #     speech = "Nice to meet you "+namedropping
 
     return {
         "fulfillmentText": speech,
