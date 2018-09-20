@@ -32,7 +32,7 @@ def processRequest(req):
     city = parameters.get("geo-city")
     date = parameters.get("date")
     time = parameters.get("time")
-    date_weather = date[:11]+" "+time[12:-3]
+    date_weather = date[:10]+" "+time[11:-3]
     name = str(parameters.get("given-name"))
     status = str(parameters.get("Status"))
     home = str(parameters.get("Home"))
