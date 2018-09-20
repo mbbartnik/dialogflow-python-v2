@@ -84,7 +84,7 @@ def processRequest(req):
             temp_min=str(celsius_result.get('temp_min'))
             temp_max=str(celsius_result.get('temp_max'))
 
-            speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+"    TEST:"+date
+            speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+"    TEST:"
 
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
