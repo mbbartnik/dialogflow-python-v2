@@ -71,7 +71,9 @@ def processRequest(req):
             humidity = str(w.get_humidity())
 
             # Get atmospheric pressure
-            pressure = w.get_pressure()
+            pressure_info = w.get_pressure()
+            pressure = str(pressure_info.get('press'))
+            sea_level = str(pressure_info.get('sea_level'))
 
             #fc = owm.daily_forecast(city)
             #f = fc.get_forecast()
@@ -84,7 +86,7 @@ def processRequest(req):
             temp_min=str(celsius_result.get('temp_min'))
             temp_max=str(celsius_result.get('temp_max'))
 
-            speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+"    TEST:"+data
+            speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+"    TEST:"+date
 
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
