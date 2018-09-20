@@ -48,9 +48,9 @@ def processRequest(req):
 
             fc = owm.daily_forecast(city)
 
-            observation = owm.weather_at_place(city)
+            #observation = owm.weather_at_place(city)
 
-            w = observation.get_weather()
+            #w = observation.get_weather()
             f = fc.get_weather_at(date_weather)
 
             # cordinate of location
@@ -91,7 +91,7 @@ def processRequest(req):
             temp_min=str(celsius_result.get('temp_min'))
             temp_max=str(celsius_result.get('temp_max'))
 
-            speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short +"TEST: "+date_weather
+            speech = "In " + city + " we have " + temp_celsius2 + " °C." + "The sky is " + info_short2 +"TEST: "+date_weather
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
 
