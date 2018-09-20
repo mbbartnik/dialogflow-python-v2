@@ -71,7 +71,7 @@ def processRequest(req):
             humidity = str(w.get_humidity())
 
             # Get atmospheric pressure
-            pressure = int(w.get_pressure())
+            pressure = str(w.get_pressure())
 
             fc = owm.daily_forecast(city)
             f = fc.get_forecast()
