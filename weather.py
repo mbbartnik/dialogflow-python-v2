@@ -45,8 +45,13 @@ def processRequest(req):
     if intent == "weather":
 
         if city != "":
+
+            fc = owm.daily_forecast(city)
+
             observation = owm.weather_at_place(city)
+
             w = observation.get_weather()
+            f = fc.get_weather_at(date_weather)
 
             # cordinate of location
             latlon_res = observation.get_location()
@@ -64,6 +69,7 @@ def processRequest(req):
 
             # weather short status
             info_short = str(w.get_status())
+            info_short2 = str(f.get_status())
 
             # weather detailed status
             info_detail = str(w.get_detailed_status())
@@ -76,18 +82,16 @@ def processRequest(req):
             pressure = str(pressure_info.get('press'))
             sea_level = str(pressure_info.get('sea_level'))
 
-            #fc = owm.daily_forecast(city)
-            #f = fc.get_forecast()
-
-
-
             # temperature in Celsius
             celsius_result = w.get_temperature('celsius')
             temp_celsius = str(celsius_result.get('temp'))
+            celsius_result2 = f.get_temperature('celsius')
+            temp_celsius2 = str(celsius_result2.get('temp'))
+            
             temp_min=str(celsius_result.get('temp_min'))
             temp_max=str(celsius_result.get('temp_max'))
 
-            speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+"    TEST: "+date_weather
+            speech = "In " + city + " we have " + temp_celsius2 + " °C." + "The sky is " + info_short2
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
 
