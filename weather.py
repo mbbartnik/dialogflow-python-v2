@@ -30,7 +30,7 @@ def processRequest(req):
     result = req.get("queryResult")
     parameters = result.get("parameters")
     city = parameters.get("geo-city")
-    date = parameters.get("date")
+    date = str(parameters.get("date"))
     name = str(parameters.get("given-name"))
     status = str(parameters.get("Status"))
     home = str(parameters.get("Home"))
