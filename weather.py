@@ -50,7 +50,7 @@ def processRequest(req):
 
         if city != "":
             now = datetime.datetime.now()
-            difference_date = date[:10] - now[:10]
+            #difference_date = date[:10] - now[:10]
 
 
             if date == "" and time == "":
@@ -93,7 +93,7 @@ def processRequest(req):
                 temp_max = str(celsius_result.get('temp_max'))
 
                 speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+" TEST  "\
-                + difference_date
+
 
             else:
                 fc = owm.three_hours_forecast(city)
