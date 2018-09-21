@@ -32,7 +32,10 @@ def processRequest(req):
     city = parameters.get("geo-city")
     date = parameters.get("date")
     time = parameters.get("time")
-    date_weather = date[:10]+" "+time[11:-5]+"00"
+    # converting to ISO standard
+    future_time_weather = time[:10] + " " + time[11:-5] + "00"
+    future_date_weather = date[:10] + " " + date[11:-5] + "00"
+    future_date_time_weather = date[:10]+" "+time[11:-5]+"00"
     name = str(parameters.get("given-name"))
     status = str(parameters.get("Status"))
     home = str(parameters.get("Home"))
@@ -46,53 +49,57 @@ def processRequest(req):
 
         if city != "":
 
-            fc = owm.three_hours_forecast(city)
+            if date == "" and time == "":
+                observation = owm.weather_at_place(city)
+                w = observation.get_weather()
+                # cordinate of location
+                latlon_res = observation.get_location()
+                lat = str(latlon_res.get_lat())
+                lon = str(latlon_res.get_lon())
 
-            observation = owm.weather_at_place(city)
+                sun = w.get_sunset_time('iso')
 
-            w = observation.get_weather()
-            f = fc.get_weather_at(date_weather)
+                # wind data
+                wind_res = w.get_wind()
+                wind_speed = str(wind_res.get('speed'))
 
-            # cordinate of location
-            latlon_res = observation.get_location()
-            lat = str(latlon_res.get_lat())
-            lon = str(latlon_res.get_lon())
+                # cloud data
+                cloud_result = str(w.get_clouds())
 
-            sun = w.get_sunset_time('iso')
+                # weather short status
+                info_short = str(w.get_status())
 
-            # wind data
-            wind_res = w.get_wind()
-            wind_speed = str(wind_res.get('speed'))
+                # weather detailed status
+                info_detail = str(w.get_detailed_status())
 
-            # cloud data
-            cloud_result = str(w.get_clouds())
+                # humidity percentage
+                humidity = str(w.get_humidity())
 
-            # weather short status
-            info_short = str(w.get_status())
-            info_short2 = str(f.get_status())
+                # Get atmospheric pressure
+                pressure_info = w.get_pressure()
+                pressure = str(pressure_info.get('press'))
+                sea_level = str(pressure_info.get('sea_level'))
 
-            # weather detailed status
-            info_detail = str(w.get_detailed_status())
+                # temperature in Celsius
+                celsius_result = w.get_temperature('celsius')
+                temp_celsius = str(celsius_result.get('temp'))
 
-            # humidity percentage
-            humidity = str(w.get_humidity())
+                temp_min = str(celsius_result.get('temp_min'))
+                temp_max = str(celsius_result.get('temp_max'))
 
-            # Get atmospheric pressure
-            pressure_info = w.get_pressure()
-            pressure = str(pressure_info.get('press'))
-            sea_level = str(pressure_info.get('sea_level'))
+                speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short
 
-            # temperature in Celsius
-            celsius_result = w.get_temperature('celsius')
-            temp_celsius = str(celsius_result.get('temp'))
+            else:
+                fc = owm.three_hours_forecast(city)
+                f = fc.get_weather_at(date_weather)
 
-            celsius_result2 = f.get_temperature('celsius')
-            temp_celsius2 = str(celsius_result2.get('temp'))
+                info_short2 = str(f.get_status())
+                info_detail2 = str(f.get_detailed_status())
+                celsius_result2 = f.get_temperature('celsius')
+                temp_celsius2 = str(celsius_result2.get('temp'))
 
-            temp_min=str(celsius_result.get('temp_min'))
-            temp_max=str(celsius_result.get('temp_max'))
+                speech = "In " + city + " we will have " + temp_celsius2 + " °C." + "The sky will be " + info_short2
 
-            speech = "In " + city + " we have " + temp_celsius2 + " °C." + "The sky is " + info_short2 +"TEST: "+date_weather
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
 
