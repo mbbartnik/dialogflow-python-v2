@@ -34,10 +34,8 @@ def processRequest(req):
     date = parameters.get("date")
     time = parameters.get("time")
     date_pariod = parameters.get('date-period')
-    # converting to ISO standard
-    future_time_weather = time[:10] + " " + time[11:-5] + "00"
-    future_date_weather = date[:10] + " " + date[11:-5] + "00"
-    future_date_time_weather = date[:10]+" "+time[11:-5]+"00"
+
+
     name = str(parameters.get("given-name"))
     status = str(parameters.get("Status"))
     home = str(parameters.get("Home"))
@@ -50,6 +48,11 @@ def processRequest(req):
     # case for intent "weather"
     if intent == "weather":
         if city != "":
+            # converting to ISO standard
+            future_time_weather = time[:10] + " " + time[11:-5] + "00"
+            future_date_weather = date[:10] + " " + date[11:-5] + "00"
+            future_date_time_weather = date[:10] + " " + time[11:-5] + "00"
+
             now = datetime.datetime.now()
             #difference_date = date[:10] - now[:10]
 
