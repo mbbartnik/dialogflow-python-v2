@@ -58,7 +58,7 @@ def processRequest(req):
 
     global pressure
     global sunrise, sunset
-    
+
     # taking data from dialogflow
     result = req.get("queryResult")
     parameters = result.get("parameters")
@@ -144,10 +144,10 @@ def processRequest(req):
         speech = "The pressure will be "+pressure+" hPa"
 
     if intent == "WeatherSunrise":
-        speech = "Sunrise time:"
+        speech = "Sunrise time:"+sunrise
 
     if intent == "WeatherSunset":
-        speech = "Sunset time:"
+        speech = "Sunset time:"+sunset
 
     if intent == "WeatherRain":
         speech = ""
