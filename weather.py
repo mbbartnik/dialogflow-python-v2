@@ -10,6 +10,8 @@ owmapikey = os.environ.get('OWMApiKey') #or provide your key here
 owm = pyowm.OWM(owmapikey)
 
 pressure = None
+sunrise = None
+sunset = None
 
 #geting and sending response to dialogflow
 @app.route('/webhook', methods=['POST'])
@@ -55,6 +57,8 @@ def getWeatherInfo(o):
 def processRequest(req):
 
     global pressure
+    global sunrise, sunset
+    
     # taking data from dialogflow
     result = req.get("queryResult")
     parameters = result.get("parameters")
@@ -138,6 +142,12 @@ def processRequest(req):
 
     if intent == "WeatherPressure":
         speech = "The pressure will be "+pressure+" hPa"
+
+    if intent == "WeatherSunrise":
+        speech = "Sunrise time:"
+
+    if intent == "WeatherSunset":
+        speech = "Sunset time:"
 
     if intent == "WeatherRain":
         speech = ""
