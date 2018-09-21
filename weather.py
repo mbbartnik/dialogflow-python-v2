@@ -24,9 +24,10 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 
-#processing the request from dialogflow
+# processing the request from dialogflow
 def processRequest(req):
-
+    
+    global pressure
     # taking data from dialogflow
     result = req.get("queryResult")
     parameters = result.get("parameters")
@@ -37,11 +38,9 @@ def processRequest(req):
     time = parameters.get("time")
     date_pariod = parameters.get('date-period')
 
-
     name = str(parameters.get("given-name"))
     status = str(parameters.get("Status"))
     home = str(parameters.get("Home"))
-
 
     # taking intent name
     meta = result.get("intent")
@@ -56,7 +55,7 @@ def processRequest(req):
             future_date_time_weather = date[:10] + " " + time[11:-5] + "00"
 
             now = datetime.datetime.now()
-            #difference_date = date[:10] - now[:10]
+            # difference_date = date[:10] - now[:10]
 
             if date == "" and time == "" and date_pariod == "":
                 observation = owm.weather_at_place(city)
@@ -164,7 +163,7 @@ def processRequest(req):
         "fulfillmentText": speech,
         "source": "webhook-micba"
         }
-    
+
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     print("Starting app on port %d" % port)
