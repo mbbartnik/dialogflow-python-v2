@@ -98,7 +98,7 @@ def processRequest(req):
                 celsius_result2 = f.get_temperature('celsius')
                 temp_celsius2 = str(celsius_result2.get('temp'))
 
-                speech = "In " + city + " we will have " + temp_celsius2 + " °C." + "The sky will be " + info_short2
+                speech = "In " + city + " we will have " + temp_celsius2 + " °C." + "The sky will be " + info_detail2
 
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
