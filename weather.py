@@ -78,7 +78,7 @@ def processRequest(req):
     intent = meta.get("displayName")
 
     # case for intent "weather"
-    if intent == "weather" or "WeatherAgain":
+    if intent == "weather" :
         if city != "":
             # converting to ISO standard
             future_time_weather = time[:10] + " " + time[11:-5] + "00"
