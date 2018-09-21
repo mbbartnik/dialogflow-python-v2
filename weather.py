@@ -144,10 +144,12 @@ def processRequest(req):
         speech = "The pressure will be "+pressure+" hPa"
 
     if intent == "WeatherSunrise":
-        speech = "Sunrise time:"+sunrise
+        sunrise_hour = sunrise[11:16]
+        speech = "The sun will rise at "+sunrise_hour+" o'clock"
 
     if intent == "WeatherSunset":
-        speech = "Sunset time:"+sunset
+        sunset_hour = sunset[11:16]
+        speech = "The sun will set at "+sunset_hour+" o'clock"
 
     if intent == "WeatherRain":
         speech = ""
