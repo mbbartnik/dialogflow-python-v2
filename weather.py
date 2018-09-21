@@ -68,6 +68,8 @@ def processRequest(req):
                 test = str(w.get_wind())
                 wind_speed = str(wind_res.get('speed'))
 
+                rain = str(w.get_rain())
+
                 # cloud data
                 cloud_result = str(w.get_clouds())
 
@@ -92,8 +94,7 @@ def processRequest(req):
                 temp_min = str(celsius_result.get('temp_min'))
                 temp_max = str(celsius_result.get('temp_max'))
 
-                speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+" TEST  "\
-
+                speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+" TEST  "+rain
 
             elif (date != "" or time != "") and date_pariod == "":
                 fc = owm.three_hours_forecast(city)
@@ -112,13 +113,13 @@ def processRequest(req):
                 speech = "We will have " + temp_celsius2 + " °C." + "The sky will be " + info_detail2
 
             else:
-                fc = owm.three_hours_forecast(city, 3)
-                f = fc.get_forecast()
-                info_short3 = str(f.get_status())
-                info_detail3 = str(f.get_detailed_status())
-                celsius_result3 = f.get_temperature('celsius')
-                temp_celsius3 = str(celsius_result3.get('temp'))
-                speech = "We will have " + temp_celsius3 + " °C." + "The sky will be " + info_detail3 + info_short3
+                #fc = owm.three_hours_forecast(city, 2)
+                #f = fc.get_forecast()
+                #info_short3 = str(f.get_status())
+                #info_detail3 = str(f.get_detailed_status())
+                #celsius_result3 = f.get_temperature('celsius')
+                #temp_celsius3 = str(celsius_result3.get('temp'))
+                speech = "Sorry, period weather is not ready yet"
 
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
