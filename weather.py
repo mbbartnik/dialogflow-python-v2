@@ -53,7 +53,7 @@ def processRequest(req):
             now = datetime.datetime.now()
             #difference_date = date[:10] - now[:10]
 
-            if date == "" and time == "" and date_pariod != "":
+            if date == "" and time == "" and date_pariod == "":
                 observation = owm.weather_at_place(city)
                 w = observation.get_weather()
                 # cordinate of location
@@ -95,7 +95,7 @@ def processRequest(req):
                 speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+" TEST  "\
 
 
-            elif (date != "" or time != "") and date_pariod != "":
+            elif (date != "" or time != "") and date_pariod == "":
                 fc = owm.three_hours_forecast(city)
                 if date != "" and time == "":
                     f = fc.get_weather_at(future_date_weather)
@@ -118,7 +118,7 @@ def processRequest(req):
                 info_detail3 = str(f.get_detailed_status())
                 celsius_result3 = f.get_temperature('celsius')
                 temp_celsius3 = str(celsius_result3.get('temp'))
-                speech = "We will have " + temp_celsius3 + " °C." + "The sky will be " + info_detail3
+                speech = "We will have " + temp_celsius3 + " °C." + "The sky will be " + info_detail3 + info_short3
 
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
