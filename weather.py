@@ -41,6 +41,7 @@ def processRequest(req):
     name = str(parameters.get("given-name"))
     status = str(parameters.get("Status"))
     home = str(parameters.get("Home"))
+    pressure = None
 
     # taking intent name
     meta = result.get("intent")
@@ -48,8 +49,6 @@ def processRequest(req):
 
     # case for intent "weather"
     if intent == "weather":
-        global pressure
-
         if city != "":
             now = datetime.datetime.now()
             #difference_date = date[:10] - now[:10]
@@ -125,7 +124,7 @@ def processRequest(req):
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
 
-    if intent =="WeatherPressure":
+    if intent == "WeatherPressure":
         speech = "The pressure will be "+pressure+" hPa"
 
     # case for intent "name"
