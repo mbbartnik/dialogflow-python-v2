@@ -97,7 +97,7 @@ def processRequest(req):
                 test = str(w.get_wind())
                 wind_speed = str(wind_res.get('speed'))
 
-                rain = str(w.get_rain())
+                rain = str(w.get_rain('3h'))
 
                 # cloud data
                 cloud_result = str(w.get_clouds())
@@ -110,7 +110,7 @@ def processRequest(req):
                 pressure, sea_leavel = getPressure(w)
                 temp_celsius, temp_min, temp_max = getTemperature(w)
 
-                speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+" TEST  "+rain
+                speech = "In " + city + " we have " + temp_celsius + " °C." + "The weather is " + info_detail+" TEST  "+rain
 
             elif (date != "" or time != "") and date_pariod == "":
                 fc = owm.three_hours_forecast(city)
@@ -126,7 +126,7 @@ def processRequest(req):
                 pressure, sea_leavel = getPressure(f)
                 temp_celsius, temp_min, temp_max = getTemperature(f)
 
-                speech = "We will have " + temp_celsius + " °C." + "The sky will be " + info_detail
+                speech = "We will have " + temp_celsius + " °C." + "The weather will be " + info_detail
 
             else:
                 #fc = owm.three_hours_forecast(city, 2)
@@ -139,6 +139,9 @@ def processRequest(req):
     if intent == "WeatherPressure":
         speech = "The pressure will be "+pressure+" hPa"
 
+    if intent == "WeatherRain":
+        speech = ""
+        #speech = rain
     # case for intent "name"
     if intent == "name":
         if name == "Michael":
