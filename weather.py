@@ -97,8 +97,8 @@ def processRequest(req):
                 test = str(w.get_wind())
                 wind_speed = str(wind_res.get('speed'))
 
-                rain = str(w.get_rain('3h'))
-
+                rain_info = w.get_rain()
+                rain = str(rain_info.get('3h'))
                 # cloud data
                 cloud_result = str(w.get_clouds())
 
