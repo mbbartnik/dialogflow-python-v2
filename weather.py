@@ -113,7 +113,7 @@ def processRequest(req):
                 speech = "We will have " + temp_celsius2 + " °C." + "The sky will be " + info_detail2
 
             else:
-                fc = owm.daily_forecast(city, 3)
+                fc = owm.three_hours_forecast(city, 3)
                 f = fc.get_forecast()
                 info_short3 = str(f.get_status())
                 info_detail3 = str(f.get_detailed_status())
