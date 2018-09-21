@@ -9,6 +9,8 @@ app = Flask(__name__)
 owmapikey = os.environ.get('OWMApiKey') #or provide your key here
 owm = pyowm.OWM(owmapikey)
 
+pressure = None
+
 #geting and sending response to dialogflow
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -39,7 +41,7 @@ def processRequest(req):
     name = str(parameters.get("given-name"))
     status = str(parameters.get("Status"))
     home = str(parameters.get("Home"))
-    pressure = None
+
 
     # taking intent name
     meta = result.get("intent")
