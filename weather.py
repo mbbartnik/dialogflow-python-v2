@@ -48,6 +48,7 @@ def processRequest(req):
 
     # case for intent "weather"
     if intent == "weather":
+        global pressure
 
         if city != "":
             now = datetime.datetime.now()
@@ -123,6 +124,9 @@ def processRequest(req):
 
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
+
+    if intent =="WeatherPressure":
+        speech = "The pressure will be "+pressure+" hPa"
 
     # case for intent "name"
     if intent == "name":
