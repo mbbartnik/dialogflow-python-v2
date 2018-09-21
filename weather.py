@@ -33,6 +33,7 @@ def processRequest(req):
     city = parameters.get("geo-city")
     date = parameters.get("date")
     time = parameters.get("time")
+    date_pariod = parameters.get('date-period')
     # converting to ISO standard
     future_time_weather = time[:10] + " " + time[11:-5] + "00"
     future_date_weather = date[:10] + " " + date[11:-5] + "00"
@@ -53,7 +54,7 @@ def processRequest(req):
             #difference_date = date[:10] - now[:10]
 
 
-            if date == "" and time == "":
+            if date == "" and time == "" and date_pariod !="":
                 observation = owm.weather_at_place(city)
                 w = observation.get_weather()
                 # cordinate of location
@@ -95,7 +96,7 @@ def processRequest(req):
                 speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+" TEST  "\
 
 
-            else:
+            elif (date != "" or time != "") and date_pariod !="":
                 fc = owm.three_hours_forecast(city)
                 if date != "" and time == "":
                     f = fc.get_weather_at(future_date_weather)
@@ -110,6 +111,15 @@ def processRequest(req):
                 temp_celsius2 = str(celsius_result2.get('temp'))
 
                 speech = "We will have " + temp_celsius2 + " °C." + "The sky will be " + info_detail2
+
+            else:
+                fc = owm.daily_forecast(city, 3)
+                f = fc.get_forecast()
+                info_short3 = str(f.get_status())
+                info_detail3 = str(f.get_detailed_status())
+                celsius_result3 = f.get_temperature('celsius')
+                temp_celsius3 = str(celsius_result3.get('temp'))
+                speech = "We will have " + temp_celsius3 + " °C." + "The sky will be " + info_detail3
 
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
