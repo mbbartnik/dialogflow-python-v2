@@ -91,7 +91,7 @@ def processRequest(req):
 
             else:
                 fc = owm.three_hours_forecast(city)
-                f = fc.get_weather_at(date_weather)
+                f = fc.get_weather_at(future_date_time_weather)
 
                 info_short2 = str(f.get_status())
                 info_detail2 = str(f.get_detailed_status())
