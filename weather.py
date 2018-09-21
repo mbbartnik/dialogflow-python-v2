@@ -91,14 +91,19 @@ def processRequest(req):
 
             else:
                 fc = owm.three_hours_forecast(city)
-                f = fc.get_weather_at(future_date_time_weather)
+                if date != "" and time == "":
+                    f = fc.get_weather_at(future_date_weather)
+                elif date == "" and time != "":
+                    f = fc.get_weather_at(future_time_weather)
+                else:
+                    f = fc.get_weather_at(future_date_time_weather)
 
                 info_short2 = str(f.get_status())
                 info_detail2 = str(f.get_detailed_status())
                 celsius_result2 = f.get_temperature('celsius')
                 temp_celsius2 = str(celsius_result2.get('temp'))
 
-                speech = "In " + city + " we will have " + temp_celsius2 + " °C." + "The sky will be " + info_detail2
+                speech = "We will have " + temp_celsius2 + " °C." + "The sky will be " + info_detail2
 
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
