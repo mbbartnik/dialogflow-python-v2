@@ -78,7 +78,7 @@ def processRequest(req):
     intent = meta.get("displayName")
 
     # case for intent "weather"
-    if intent == "weather" :
+    if intent == "weather":
         if city != "":
             # converting to ISO standard
             future_time_weather = time[:10] + " " + time[11:-5] + "00"
@@ -144,12 +144,12 @@ def processRequest(req):
         speech = "The pressure will be "+pressure+" hPa"
 
     if intent == "WeatherSunrise":
-        #sunrise_hour = sunrise[11:16]
-        speech = "The sun will rise at "+sunrise+" o'clock"
+        sunrise_hour = sunrise[11:16]
+        speech = "The sun will rise at "+sunrise_hour+" o'clock"
 
     if intent == "WeatherSunset":
-        #sunset_hour = sunset[11:16]
-        speech = "The sun will set at "+sunset+" o'clock"
+        sunset_hour = sunset[11:16]
+        speech = "The sun will set at "+sunset_hour+" o'clock"
 
     if intent == "WeatherRain":
         speech = ""
