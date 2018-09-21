@@ -24,9 +24,36 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 
+def getPressure(o):
+    # Get atmospheric pressure
+    pressure_info = o.get_pressure()
+    pressure = str(pressure_info.get('press'))
+    sea_level = str(pressure_info.get('sea_level'))
+    return pressure, sea_level
+
+def getTemperature(o):
+    # temperature in Celsius
+    celsius_result = o.get_temperature('celsius')
+    temp_celsius = str(celsius_result.get('temp'))
+    temp_min = str(celsius_result.get('temp_min'))
+    temp_max = str(celsius_result.get('temp_max'))
+    return temp_celsius, temp_min, temp_max
+
+def getSunInfo(o):
+    sunset = o.get_sunset_time('iso')
+    sunrise = o.get_sunrise_time('iso')
+    return sunrise, sunset
+
+def getWeatherInfo(o):
+    # weather short status
+    info_short = str(o.get_status())
+    # weather detailed status
+    info_detail = str(o.get_detailed_status())
+    return info_short, info_detail
+
 # processing the request from dialogflow
 def processRequest(req):
-    
+
     global pressure
     # taking data from dialogflow
     result = req.get("queryResult")
@@ -65,8 +92,6 @@ def processRequest(req):
                 lat = str(latlon_res.get_lat())
                 lon = str(latlon_res.get_lon())
 
-                sun = w.get_sunset_time('iso')
-
                 # wind data
                 wind_res = w.get_wind()
                 test = str(w.get_wind())
@@ -77,26 +102,13 @@ def processRequest(req):
                 # cloud data
                 cloud_result = str(w.get_clouds())
 
-                # weather short status
-                info_short = str(w.get_status())
-
-                # weather detailed status
-                info_detail = str(w.get_detailed_status())
-
                 # humidity percentage
                 humidity = str(w.get_humidity())
 
-                # Get atmospheric pressure
-                pressure_info = w.get_pressure()
-                pressure = str(pressure_info.get('press'))
-                sea_level = str(pressure_info.get('sea_level'))
-
-                # temperature in Celsius
-                celsius_result = w.get_temperature('celsius')
-                temp_celsius = str(celsius_result.get('temp'))
-
-                temp_min = str(celsius_result.get('temp_min'))
-                temp_max = str(celsius_result.get('temp_max'))
+                sunrise, sunset = getSunInfo(w)
+                info_short, info_detail = getWeatherInfo(w)
+                pressure, sea_leavel = getPressure(w)
+                temp_celsius, temp_min, temp_max = getTemperature(w)
 
                 speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+" TEST  "+rain
 
@@ -109,22 +121,18 @@ def processRequest(req):
                 else:
                     f = fc.get_weather_at(future_date_time_weather)
 
-                info_short2 = str(f.get_status())
-                info_detail2 = str(f.get_detailed_status())
-                celsius_result2 = f.get_temperature('celsius')
-                temp_celsius2 = str(celsius_result2.get('temp'))
+                sunrise, sunset = getSunInfo(f)
+                info_short, info_detail = getWeatherInfo(f)
+                pressure, sea_leavel = getPressure(f)
+                temp_celsius, temp_min, temp_max = getTemperature(f)
 
-                speech = "We will have " + temp_celsius2 + " °C." + "The sky will be " + info_detail2
+                speech = "We will have " + temp_celsius + " °C." + "The sky will be " + info_detail
 
             else:
                 #fc = owm.three_hours_forecast(city, 2)
                 #f = fc.get_forecast()
-                #info_short3 = str(f.get_status())
-                #info_detail3 = str(f.get_detailed_status())
-                #celsius_result3 = f.get_temperature('celsius')
-                #temp_celsius3 = str(celsius_result3.get('temp'))
-                speech = "Sorry, period weather is not ready yet"
 
+                speech = "Sorry, period weather is not ready yet"
         else:
             speech = "Please tell me which city you mean, it is necessary for proper work."
 
@@ -168,3 +176,4 @@ if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     print("Starting app on port %d" % port)
     app.run(debug=False, port=port, host='0.0.0.0')
+
