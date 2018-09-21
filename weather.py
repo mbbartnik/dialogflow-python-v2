@@ -65,8 +65,7 @@ def processRequest(req):
 
                 # wind data
                 wind_res = w.get_wind()
-                test = str( w.get_wind())
-                test1 = w.get_wind_direction()
+                test = str(w.get_wind())
                 wind_speed = str(wind_res.get('speed'))
 
                 # cloud data
@@ -94,7 +93,7 @@ def processRequest(req):
                 temp_max = str(celsius_result.get('temp_max'))
 
                 speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+" TEST  "\
-                         + difference_date
+                #difference_date
 
             else:
                 fc = owm.three_hours_forecast(city)
