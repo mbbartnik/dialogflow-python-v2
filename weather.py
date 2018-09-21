@@ -50,7 +50,7 @@ def processRequest(req):
 
         if city != "":
             now = datetime.datetime.now()
-            difference_date = date[:10] - now[:10]
+            #difference_date = date[:10] - now[:10]
 
 
             if date == "" and time == "":
