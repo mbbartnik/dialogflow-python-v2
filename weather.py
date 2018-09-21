@@ -1,5 +1,6 @@
 # coding=utf-8
 from flask import Flask,request,make_response
+import datetime
 import os,json
 import pyowm
 import os
@@ -48,6 +49,9 @@ def processRequest(req):
     if intent == "weather":
 
         if city != "":
+            now = datetime.datetime.now()
+            difference_date = date[:10] - now[:10]
+
 
             if date == "" and time == "":
                 observation = owm.weather_at_place(city)
@@ -62,6 +66,7 @@ def processRequest(req):
                 # wind data
                 wind_res = w.get_wind()
                 test = str( w.get_wind())
+                test1 = w.get_wind_direction()
                 wind_speed = str(wind_res.get('speed'))
 
                 # cloud data
@@ -88,7 +93,8 @@ def processRequest(req):
                 temp_min = str(celsius_result.get('temp_min'))
                 temp_max = str(celsius_result.get('temp_max'))
 
-                speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+" TEST  "+test
+                speech = "In " + city + " we have " + temp_celsius + " °C." + "The sky is " + info_short+" TEST  "\
+                         + difference_date
 
             else:
                 fc = owm.three_hours_forecast(city)
