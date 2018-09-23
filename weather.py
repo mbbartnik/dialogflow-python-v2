@@ -145,7 +145,7 @@ def processRequest(req):
 
             speech = "Sorry, period weather is not ready yet"
         # else:
-        speech = "Please tell me which city you mean, it is necessary for proper work."
+        # speech = "Please tell me which city you mean, it is necessary for proper work."
 
     if intent == "WeatherPressure":
         speech = "The pressure will be " + pressure + " hPa"
