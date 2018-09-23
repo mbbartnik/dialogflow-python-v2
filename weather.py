@@ -72,10 +72,10 @@ def processRequest(req):
     # taking parameters data
     city = parameters.get("geo-city")
     date = parameters.get("date")
-    date_context = result.get("outputContexts")
-    date_parameters2 = date_context[:]
-    date_parameters = date_parameters2.get("parameters")
-    date_test = str(date_parameters.get("date.original"))
+    outputContext = result.get("outputContexts")
+    # date_parameters2 = date_context[:]
+    # date_parameters = date_parameters2.get("parameters")
+    date_test = str(outputContext[0]['parameters']['date.original'])
     time = parameters.get("time")
     date_pariod = parameters.get("date-period")
 
