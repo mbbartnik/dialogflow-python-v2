@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 owmapikey = os.environ.get('OWMApiKey')  # or provide your key here
-owm = pyowm.OWM(owmapikey)
+owm = pyowm.OWM(owmapikey, language='pl')
 
 pressure = None
 sunrise = None
@@ -73,8 +73,6 @@ def processRequest(req):
     city = parameters.get("geo-city")
     date = parameters.get("date")
     outputContext = result.get("outputContexts")
-    # date_parameters2 = date_context[:]
-    # date_parameters = date_parameters2.get("parameters")
     date_test = str(outputContext[0]['parameters']['date.original'])
     time = parameters.get("time")
     date_pariod = parameters.get("date-period")
@@ -140,7 +138,7 @@ def processRequest(req):
             pressure, sea_leavel = getPressure(f)
             temp_celsius, temp_min, temp_max = getTemperature(f)
 
-            speech = "We will have " + temp_celsius + " °C." + "The weather will be " + info_detail+" TEST: "+date_test
+            speech = date_test+" we will have " + temp_celsius + " °C." + "The weather will be " + info_detail
 
         else:
             # fc = owm.three_hours_forecast(city, 2)
