@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 owmapikey = os.environ.get('OWMApiKey')  # or provide your key here
-owm = pyowm.OWM(owmapikey, language='pl')
+owm = pyowm.OWM(owmapikey, language='en')
 
 pressure = None
 sunrise = None
