@@ -142,7 +142,8 @@ def processRequest(req):
             pressure, sea_leavel = getPressure(f)
             temp_celsius, temp_min, temp_max = getTemperature(f)
 
-            speech = date_test+" we will have " + temp_celsius + " degrees Celsius." + "The weather will be " + info_detail
+            speech = date_test+" we will have " + temp_celsius + " degrees Celsius." + "The weather will be " + info_detail+" TEST: "\
+             + future_date_weather+future_time_weather+future_date_time_weather
 
         else:
             # fc = owm.three_hours_forecast(city, 2)
