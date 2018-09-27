@@ -132,10 +132,13 @@ def processRequest(req):
             fc = owm.three_hours_forecast(city)
             if date != "" and time == "":
                 f = fc.get_weather_at(future_date_weather)
+                test = a
             elif date == "" and time != "":
                 f = fc.get_weather_at(future_time_weather)
+                test = b
             else:
                 f = fc.get_weather_at(future_date_time_weather)
+                test = c
 
             sunrise, sunset = getSunInfo(f)
             info_short, info_detail = getWeatherInfo(f)
@@ -143,7 +146,7 @@ def processRequest(req):
             temp_celsius, temp_min, temp_max = getTemperature(f)
 
             speech = date_test+" we will have " + temp_celsius + " degrees Celsius." + "The weather will be " + info_detail+" TEST: "\
-             + future_date_weather+future_time_weather+future_date_time_weather
+             + future_date_weather+future_time_weather+future_date_time_weather+"TESTTT: "+test
 
         else:
             # fc = owm.three_hours_forecast(city, 2)
