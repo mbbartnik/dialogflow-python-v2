@@ -4,6 +4,8 @@ import datetime
 import os, json
 import pyowm
 import os
+import wikipediaapi
+
 
 app = Flask(__name__)
 owmapikey = os.environ.get('OWMApiKey')  # or provide your key here
@@ -72,6 +74,7 @@ def processRequest(req):
     # taking parameters data
     city = parameters.get("geo-city")
     date = parameters.get("date")
+    wikipedia_quote = str(parameters.get("any"))
     outputContext = result.get("outputContexts")
     date_test = str(outputContext[0]['parameters']['date.original'])
     time = parameters.get("time")
@@ -162,6 +165,11 @@ def processRequest(req):
     if intent == "WeatherRain":
         speech = ""
         # speech = rain
+    if action == "wikipedia":
+        wiki_wiki = wikipediaapi.Wikipedia('en')
+        page_py = wiki_wiki.page('wikipedia_quote')
+        speech = page_py.summary[0:60]
+
     # case for intent "name"
     if intent == "name":
         if name == "Michael":
