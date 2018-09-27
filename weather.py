@@ -122,7 +122,7 @@ def processRequest(req):
             pressure, sea_leavel = getPressure(w)
             temp_celsius, temp_min, temp_max = getTemperature(w)
 
-            speech = "In " + city + " we have " + temp_celsius + " °C." + "The weather is " + info_detail
+            speech = "In " + city + " we have " + temp_celsius + " degrees Celsius." + "The weather is " + info_detail
 
         elif (date != "" or time != "") and date_pariod == "":
             fc = owm.three_hours_forecast(city)
@@ -138,7 +138,7 @@ def processRequest(req):
             pressure, sea_leavel = getPressure(f)
             temp_celsius, temp_min, temp_max = getTemperature(f)
 
-            speech = date_test+" we will have " + temp_celsius + " °C." + "The weather will be " + info_detail
+            speech = date_test+" we will have " + temp_celsius + " degrees Celsius." + "The weather will be " + info_detail
 
         else:
             # fc = owm.three_hours_forecast(city, 2)
