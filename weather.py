@@ -173,7 +173,7 @@ def processRequest(req):
     if action == "wikipedia":
         wiki_wiki = wikipediaapi.Wikipedia('en')
         page_py = wiki_wiki.page(wikipedia_quote)
-        speech = page_py.summary[0:60] + wikipedia_quote
+        speech = page_py.summary[0:400]
 
     # case for intent "name"
     if intent == "name":
