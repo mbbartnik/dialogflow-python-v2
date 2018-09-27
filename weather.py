@@ -76,7 +76,7 @@ def processRequest(req):
     date = parameters.get("date")
     wikipedia_quote = str(parameters.get("any"))
     outputContext = result.get("outputContexts")
-    date_test = str(outputContext[0]['parameters']['date.original'])
+
     time = parameters.get("time")
     date_pariod = parameters.get("date-period")
 
@@ -90,6 +90,7 @@ def processRequest(req):
 
     # case for intent "weather"
     if action == "weather_info":
+        date_test = str(outputContext[0]['parameters']['date.original'])
         # if city != "":
         # converting to ISO standard
         future_time_weather = time[:10] + " " + time[11:-5] + "00"
